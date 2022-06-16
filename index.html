@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css" <title>
+	</title>
+</head>
+
+<body>
+	<div class="interfaccia">
+		<label class="Slider">R</label>
+		<input id="#fillSliderR" type="range" min="0" max="255" step="1" value="225">
+		<label class="Slider">G</label>
+		<input id="#fillSliderG" type="range" min="0" max="255" step="1" value="60">
+		<label class="Slider">B</label>
+		<input id="#fillSliderB" type="range" min="0" max="255" step="1" value="205">
+		<label class="Slider">Distortion</label>
+		<input id="#distortionSlider" type="range" min="0" max="100" step="0.1" value="2">
+		<label class="Slider">Jolly</label>
+		<input id="#jollySlider" type="range" min="0" max="500" step="1" value="10">
+		<label class="Slider">CurvaX</label>
+		<input id="#curvaSliderX" type="range" min="0" max="0.5" step="0.001" value="0.001">
+		<label class="Slider">CurvaY</label>
+		<input id="#curvaSliderY" type="range" min="0" max="0.5" step="0.001" value="0.001">
+
+
+
+		<!-- </select> -->
+	</div>
+
+	<script>
+
+
+		let cam;
+		function setup() {
+			createCanvas(windowWidth, windowHeight);
+			cam = createCapture(VIDEO);
+			cam.hide();
+			rectMode(CENTER);
+			noStroke();
+		}
+		function windowResized() {
+			resizeCanvas(windowWidth, windowHeight);
+		}
+		function draw() {
+		const	fillSliderR = document.getElementById("#fillSliderR").value;
+		const	fillSliderG = document.getElementById("#fillSliderG").value;
+		const	fillSliderB = document.getElementById("#fillSliderB").value;
+		const distortionSlider = document.getElementById("#distortionSlider").value
+		const jollySlider = document.getElementById("#jollySlider").value
+		const curvaSliderX = sin((frameCount*0.5)*document.getElementById("#curvaSliderX").value)
+		const curvaSliderY = sin((frameCount*0.5)*document.getElementById("#curvaSliderY").value)
+
+			background(20);
+			fill(fillSliderR, fillSliderB, fillSliderG); //parametrizza
+			cam.loadPixels();
+			const s = (sin(frameCount * 0.5) * 5) //parametrizza
+			translate(width / 2, height / 2)
+			for (let y = 0; y < cam.height; y += 11) {
+				for (let x = 0; x < cam.width; x += 5) {
+					let index = ((x + y * cam.width) * 4)
+					const r = cam.pixels[index + 0]
+					const g = cam.pixels[index + 1]
+					const b = cam.pixels[index + 2]
+					let xpos = width-(x / cam.width) * width - width / 2;
+					let ypos = (y / cam.height) * height - height / 2;
+					xpos += noise(x * curvaSliderX, y * curvaSliderX, s * curvaSliderX) * distortionSlider - (distortionSlider / 2) //1000 - 500 *x -x/2
+					ypos += noise(y * curvaSliderY, x * curvaSliderY, s * curvaSliderY) * distortionSlider - (distortionSlider / 2)
+					
+					let lum = brightness(color(r,g,b)) / 255
+
+					lum = pow(lum, 3);
+					const lato = lum * jollySlider 
+
+					//push()
+					
+					rect(xpos, ypos, s*1*distortionSlider*0.1, lato)
+					//pop()
+				}
+			}
+		}
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+</body>
+
+</html>

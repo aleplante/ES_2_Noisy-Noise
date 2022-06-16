@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    background-color: black;
+    
+}
+canvas{
+    display: block;
+}
+.interfaccia{
+    position:absolute;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    vertical-align: baseline;
+    bottom:50px;
+    display: flex;
+    flex-direction: row;
+    left:10%;
+    color:white;
+}
+.slider{
+    color:white;
+    font-size: 16pt;
+
+}
+input[type="range"]{
+    -webkit-appearance: none;
+    rotate: -90deg;
+  width: 100px;
+  height: 7px;
+  background:none;
+  border: solid 2px white;
+  border-radius: 0px;
+  background-image: none;
+  margin:10px;
+opacity: 30%;
+}
