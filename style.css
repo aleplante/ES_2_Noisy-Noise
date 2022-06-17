@@ -1,14 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,400&display=swap');
+
 body {
     margin: 0;
+    font-family: 'Montserrat', sans-serif;
     background-color: black;
     
 }
 canvas{
     display: block;
 }
+svg {
+    position: fixed;
+    top: 4vh;
+    right: 4vh;
+    background-color: transparent;
+    width: 1.4vw;
+    z-index: 99999;
+}
 .interfaccia{
     position:absolute;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     vertical-align: baseline;
     bottom:50px;
     display: flex;
@@ -32,4 +42,19 @@ input[type="range"]{
   background-image: none;
   margin:10px;
 opacity: 30%;
+}
+nav {
+    display: block;
+    color: white;
+    list-style: none;
+    position: fixed;
+    left:1vw;
+    top:2vh;
+}
+
+
+a {
+    text-decoration: none;
+    color: white;
+    font-weight: 200;
 }
